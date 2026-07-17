@@ -1,0 +1,12 @@
+import { IMediaFile } from "./IMediaFile";
+
+export interface IPost {
+  id: number;
+  title: string;
+  content: string;
+  authorId: number;
+  author: string;
+  likesCount: number;
+  isLiked: boolean;
+  mediaFiles: IMediaFile[];
+}

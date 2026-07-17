@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { login as loginRequest } from "../api/authApi";
 import { useAppDispatch } from "../hooks/redux";
 import { login as loginAction } from "../store/auth/authSlice";
+import { Link, useNavigate } from "react-router-dom";
 
 function LoginPage() {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
@@ -26,7 +28,15 @@ function LoginPage() {
 
       localStorage.setItem("token", response.data.access);
 
-      // позже здесь будет navigate("/feed")
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          id: response.data.id,
+          login: response.data.login,
+        }),
+      );
+
+      navigate("/");
     } catch (e) {
       console.error(e);
       alert("Неверный логин или пароль");

@@ -14,3 +14,11 @@ export const register = (login: string, password: string) => {
     password,
   });
 };
+
+export const refresh = () => {
+  return api.post("/auth/refresh");
+};
+
+export const logout = () => {
+  return api.post<void>("/auth/logout");
+};
