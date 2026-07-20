@@ -12,7 +12,7 @@ function Header() {
   console.log("user data ", user);
 
   const handleLogout = async () => {
-    const response = await logoutResponse();
+    await logoutResponse();
 
     dispatch(logout());
 

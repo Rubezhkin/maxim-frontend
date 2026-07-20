@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import { getFeed } from "../api/postApi";
-import PostCard from "../components/PostCard";
 import { IPost } from "../models/IPost";
 import PostFeed from "../components/PostFeed";
 

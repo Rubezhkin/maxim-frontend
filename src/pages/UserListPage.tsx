@@ -23,9 +23,13 @@ function UserListPage() {
   return (
     <>
       <Header />
-      {users?.map((user) => (
-        <UserCard user={user} />
-      ))}
+      {users?.map(
+        (
+          user, //переделать под отдельный компонент
+        ) => (
+          <UserCard user={user} />
+        ),
+      )}
     </>
   );
 }
