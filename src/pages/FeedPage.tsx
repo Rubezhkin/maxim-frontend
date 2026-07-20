@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import { getFeed } from "../api/postApi";
 import PostCard from "../components/PostCard";
 import { IPost } from "../models/IPost";
+import PostFeed from "../components/PostFeed";
 
 function FeedPage() {
   const [posts, setPosts] = useState<IPost[]>([]);
@@ -22,10 +23,7 @@ function FeedPage() {
   return (
     <>
       <Header />
-
-      {posts.map((post) => (
-        <PostCard key={post.id} post={post} />
-      ))}
+      {loading ? "Идет загрузка" : <PostFeed posts={posts} />}
     </>
   );
 }

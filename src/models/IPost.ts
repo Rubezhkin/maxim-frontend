@@ -8,5 +8,6 @@ export interface IPost {
   author: string;
   likesCount: number;
   isLiked: boolean;
+  commentsCount: number;
   mediaFiles: IMediaFile[];
 }

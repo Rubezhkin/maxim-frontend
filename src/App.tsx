@@ -6,6 +6,7 @@ import FeedPage from "./pages/FeedPage";
 import { useAppSelector } from "./hooks/redux";
 import PrivateRoute from "./components/PrivateRoute";
 import UserPage from "./pages/UserPage";
+import UserListPage from "./pages/UserListPage";
 
 function App() {
   const isAuth = useAppSelector((state) => state.auth.user);
@@ -27,6 +28,14 @@ function App() {
           element={
             <PrivateRoute>
               <UserPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/users"
+          element={
+            <PrivateRoute>
+              <UserListPage />
             </PrivateRoute>
           }
         />
