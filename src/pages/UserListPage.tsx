@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { IUserList } from "../models/IUserList";
 import { getUsers } from "../api/userApi";
 import Header from "../components/Header";
-import UserCard from "../components/UserCard";
+import UserList from "../components/UserList";
 
 function UserListPage() {
-  const [users, setUsers] = useState<IUserList[] | null>(null);
+  const [users, setUsers] = useState<IUserList[]>([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     loadUsers();
@@ -23,13 +23,7 @@ function UserListPage() {
   return (
     <>
       <Header />
-      {users?.map(
-        (
-          user, //переделать под отдельный компонент
-        ) => (
-          <UserCard user={user} />
-        ),
-      )}
+      {loading ? <>Идет Загрузка</> : <UserList users={users} />}
     </>
   );
 }

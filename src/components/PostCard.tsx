@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { IPost } from "../models/IPost";
 
 interface Props {
@@ -8,9 +9,13 @@ function PostCard({ post }: Props) {
   return (
     <div>
       <h1>{post.id}</h1>
-      <h2>{post.title}</h2>
+      <Link to={`/post/${post.id}`}>
+        <h2>{post.title}</h2>
+      </Link>
       <p>{post.content}</p>
-      <small>{post.author}</small>
+      <Link to={`/profile/${post.authorId}`}>
+        <small>{post.author}</small>
+      </Link>
       <p>лайкнули {post.likesCount} раз</p>
       <p>{post.isLiked ? "пост лайкнут" : "пост не лайкнут"}</p>
       <p>прокомментировали {post.commentsCount} раз</p>

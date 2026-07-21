@@ -3,13 +3,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage";
 import FeedPage from "./pages/FeedPage";
-import { useAppSelector } from "./hooks/redux";
 import PrivateRoute from "./components/PrivateRoute";
 import UserPage from "./pages/UserPage";
 import UserListPage from "./pages/UserListPage";
+import PostPage from "./pages/PostPage";
 
 function App() {
-  const isAuth = useAppSelector((state) => state.auth.user);
   return (
     <BrowserRouter>
       <Routes>
@@ -36,6 +35,14 @@ function App() {
           element={
             <PrivateRoute>
               <UserListPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/post/:id"
+          element={
+            <PrivateRoute>
+              <PostPage />
             </PrivateRoute>
           }
         />

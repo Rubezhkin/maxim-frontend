@@ -1,5 +1,6 @@
 import { api } from "./axios";
 import { IAuthResponse } from "../models/IAuthResponse";
+import { IRefreshRequest } from "../models/IRefreshRequest";
 
 export const login = (login: string, password: string) => {
   return api.post<IAuthResponse>("/auth/login", {
@@ -16,7 +17,7 @@ export const register = (login: string, password: string) => {
 };
 
 export const refresh = () => {
-  return api.post("/auth/refresh");
+  return api.post<IRefreshRequest>("/auth/refresh");
 };
 
 export const logout = () => {

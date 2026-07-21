@@ -6,6 +6,7 @@ export interface IPost {
   content: string;
   authorId: number;
   author: string;
+  createdAt: Date;
   likesCount: number;
   isLiked: boolean;
   commentsCount: number;

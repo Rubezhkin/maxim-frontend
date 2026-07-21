@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { IUserList } from "../models/IUserList";
 
 interface Props {
@@ -7,7 +8,8 @@ interface Props {
 function UserCard({ user }: Props) {
   return (
     <div>
-      {user.login} {user.subscriberCount} подписчиков
+      <Link to={`/profile/${user.id}`}>{user.login} </Link>
+      {user.subscriberCount} подписчиков
     </div>
   );
 }
