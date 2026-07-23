@@ -7,6 +7,9 @@ import PrivateRoute from "./components/PrivateRoute";
 import UserPage from "./pages/UserPage";
 import UserListPage from "./pages/UserListPage";
 import PostPage from "./pages/PostPage";
+import SubscribersPage from "./pages/SubscribersPage";
+import SubscriptionPage from "./pages/SubscriptionsPage";
+import ErrorPage from "./pages/ErrorPage";
 
 function App() {
   return (
@@ -46,6 +49,23 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route
+          path="/profile/:id/subscribers"
+          element={
+            <PrivateRoute>
+              <SubscribersPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/profile/:id/subscriptions"
+          element={
+            <PrivateRoute>
+              <SubscriptionPage />
+            </PrivateRoute>
+          }
+        />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
   );

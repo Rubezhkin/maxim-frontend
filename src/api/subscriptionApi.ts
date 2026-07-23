@@ -1,4 +1,7 @@
+import { IUser } from "../models/IUser";
+import { IUserList } from "../models/IUserList";
 import { api } from "./axios";
+import { mapUserList } from "./userApi";
 
 interface ISubscriptionCount {
   count: number;
@@ -26,4 +29,22 @@ export async function getSubscriberCount(
       params: { authorId: userId },
     })
   ).data;
+}
+
+export async function getSubscribers(authorId: number): Promise<IUserList[]> {
+  const list = await api.get<IUser[]>("/subscription/subscribers", {
+    params: { authorId },
+  });
+
+  return Promise.all(list.data.map(mapUserList));
+}
+
+export async function getSubscriptions(
+  subscriberId: number,
+): Promise<IUserList[]> {
+  const list = await api.get<IUser[]>("/subscription/subscriptions", {
+    params: { subscriberId },
+  });
+
+  return Promise.all(list.data.map(mapUserList));
 }

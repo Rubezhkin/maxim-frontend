@@ -8,7 +8,6 @@ interface Props {
 function PostCard({ post }: Props) {
   return (
     <div>
-      <h1>{post.id}</h1>
       <Link to={`/post/${post.id}`}>
         <h2>{post.title}</h2>
       </Link>
@@ -16,9 +15,9 @@ function PostCard({ post }: Props) {
       <Link to={`/profile/${post.authorId}`}>
         <small>{post.author}</small>
       </Link>
-      <p>лайкнули {post.likesCount} раз</p>
+      <p>лайкнули {post.likesCount} раз(а)</p>
       <p>{post.isLiked ? "пост лайкнут" : "пост не лайкнут"}</p>
-      <p>прокомментировали {post.commentsCount} раз</p>
+      <p>прокомментировали {post.commentsCount} раз(а)</p>
       {post.mediaFiles.length > 0 && (
         <img
           src={`http://localhost:5000/${post.mediaFiles[0].name}`}
