@@ -33,7 +33,7 @@ async function mapUserProfile(user: IUser): Promise<IUserProfile> {
   };
 }
 
-async function mapUserList(user: IUser): Promise<IUserList> {
+export async function mapUserList(user: IUser): Promise<IUserList> {
   const subscriberCount = await getSubscriberCount(user.id);
   return {
     ...user,

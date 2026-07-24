@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getUserProfile } from "../api/userApi";
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
@@ -30,8 +30,13 @@ function UserPage() {
       ) : (
         <>
           страница пользователя {user?.login} <br />
-          {user?.subscriberCount} подписчиков <br />
-          {user?.subscriptionCount} подписок
+          <Link to={`/profile/${user?.id}/subscribers`}>
+            {user?.subscriberCount} подписчиков{" "}
+          </Link>
+          <br />
+          <Link to={`/profile/${user?.id}/subscriptions`}>
+            {user?.subscriptionCount} подписок
+          </Link>
           <br />
           <PostFeed posts={user?.posts ?? []} />
         </>

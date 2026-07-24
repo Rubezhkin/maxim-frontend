@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { login as loginRequest } from "../api/authApi";
 import { useAppDispatch } from "../hooks/redux";
 import { login as loginAction } from "../store/auth/authSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
   const dispatch = useAppDispatch();
@@ -13,8 +13,6 @@ function LoginPage() {
   const handleLogin = async () => {
     try {
       const response = await loginRequest(login, password);
-
-      console.log(response.data);
 
       dispatch(
         loginAction({

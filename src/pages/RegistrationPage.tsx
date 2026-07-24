@@ -14,8 +14,6 @@ function RegistrationPage() {
     try {
       const response = await register(login, password);
 
-      console.log(response.data);
-
       dispatch(
         loginAction({
           token: response.data.access,
