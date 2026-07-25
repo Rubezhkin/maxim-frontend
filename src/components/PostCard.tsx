@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { IPost } from "../models/IPost";
+import LikePostButton from "./LikePostButton";
 
 interface Props {
   post: IPost;
+  onChange: () => Promise<void>;
 }
 
-function PostCard({ post }: Props) {
+function PostCard({ post, onChange }: Props) {
   return (
     <div>
       <Link to={`/post/${post.id}`}>
@@ -16,7 +18,7 @@ function PostCard({ post }: Props) {
         <small>{post.author}</small>
       </Link>
       <p>лайкнули {post.likesCount} раз(а)</p>
-      <p>{post.isLiked ? "пост лайкнут" : "пост не лайкнут"}</p>
+      <LikePostButton id={post.id} isLiked={post.isLiked} onChange={onChange} />
       <p>прокомментировали {post.commentsCount} раз(а)</p>
       {post.mediaFiles.length > 0 && (
         <img

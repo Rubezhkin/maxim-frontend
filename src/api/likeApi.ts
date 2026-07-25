@@ -34,3 +34,19 @@ export async function getIsLikedComment(commentId: number): Promise<IIsLiked> {
     await api.get<IIsLiked>("/like-comment/isLiked", { params: { commentId } })
   ).data;
 }
+
+export async function likePost(postId: number): Promise<void> {
+  await api.post<void>("/like-post/like", null, { params: { postId } });
+}
+
+export async function unlikePost(postId: number): Promise<void> {
+  await api.post<void>("/like-post/unlike", null, { params: { postId } });
+}
+
+export async function likeComment(commentId: number): Promise<void> {
+  await api.post<void>("/like-comment/like", null, { params: { commentId } });
+}
+
+export async function unlikeComment(commentId: number): Promise<void> {
+  await api.post<void>("/like-comment/unlike", null, { params: { commentId } });
+}

@@ -4,11 +4,14 @@ import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import { IUserProfile } from "../models/IUserProfile";
 import PostFeed from "../components/PostFeed";
+import SubscribeButton from "../components/SubscribeButton";
+import { useAppSelector } from "../hooks/redux";
 
 function UserPage() {
   const { id } = useParams();
   const [user, setUser] = useState<IUserProfile | null>(null);
   const [loading, setLoading] = useState(true);
+  const auhtUser = useAppSelector((state) => state.auth.user);
 
   useEffect(() => {
     loadUser();
@@ -27,7 +30,7 @@ function UserPage() {
       <Header />
       {loading ? (
         <>Идет Загрузка</>
-      ) : (
+      ) : user ? (
         <>
           страница пользователя {user?.login} <br />
           <Link to={`/profile/${user?.id}/subscribers`}>
@@ -38,8 +41,19 @@ function UserPage() {
             {user?.subscriptionCount} подписок
           </Link>
           <br />
-          <PostFeed posts={user?.posts ?? []} />
+          {auhtUser?.id === user.id ? (
+            <>Добавить и убрать посты</>
+          ) : (
+            <SubscribeButton
+              id={user?.id}
+              isSubscribed={user?.isSubscribed}
+              onChange={loadUser}
+            />
+          )}
+          <PostFeed posts={user?.posts ?? []} onChange={loadUser} />
         </>
+      ) : (
+        <>Пользватель не найден</>
       )}
     </div>
   );

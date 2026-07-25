@@ -37,8 +37,8 @@ function PostPage() {
         <>
           {post ? (
             <>
-              <PostCard post={post} />
-              <Comments comments={comments} />
+              <PostCard post={post} onChange={loadPost} />
+              <Comments comments={comments} onChange={loadPost} />
             </>
           ) : (
             <>Пост не найден!</>

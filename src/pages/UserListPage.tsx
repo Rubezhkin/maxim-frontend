@@ -23,7 +23,11 @@ function UserListPage() {
   return (
     <>
       <Header />
-      {loading ? <>Идет Загрузка</> : <UserList users={users} />}
+      {loading ? (
+        <>Идет Загрузка</>
+      ) : (
+        <UserList users={users} onChange={loadUsers} />
+      )}
     </>
   );
 }

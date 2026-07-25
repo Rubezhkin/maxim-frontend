@@ -11,6 +11,10 @@ interface ISubscriberCount {
   count: number;
 }
 
+interface IIsSubscribed {
+  isSubscribed: boolean;
+}
+
 export async function getSubscriptionCount(
   userId: number,
 ): Promise<ISubscriptionCount> {
@@ -47,4 +51,26 @@ export async function getSubscriptions(
   });
 
   return Promise.all(list.data.map(mapUserList));
+}
+
+export async function getIsSubscribed(
+  authorId: number,
+): Promise<IIsSubscribed> {
+  return (
+    await api.get<IIsSubscribed>("/subscription/isSubscribed", {
+      params: { authorId },
+    })
+  ).data;
+}
+
+export async function subscribe(authorId: number): Promise<void> {
+  await api.post<void>("/subscription/subscribe", null, {
+    params: { authorId },
+  });
+}
+
+export async function unsubscribe(authorId: number): Promise<void> {
+  await api.post<void>("/subscription/unsubscribe", null, {
+    params: { authorId },
+  });
 }

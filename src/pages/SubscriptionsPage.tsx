@@ -34,7 +34,8 @@ function SubscriptionPage() {
         <>Идет Загрузка</>
       ) : (
         <>
-          Список подписчиков {author?.login} <UserList users={users} />
+          Список подписок {author?.login} <br />
+          <UserList users={users} onChange={loadUsers} />
         </>
       )}
     </>

@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { IComment } from "../models/IComment";
+import LikeCommentButton from "./LikeCommentButton";
 
 interface Props {
   comment: IComment;
+  onChange: () => Promise<void>;
 }
 
-function CommentCard({ comment }: Props) {
+function CommentCard({ comment, onChange }: Props) {
   return (
     <div>
       <Link to={`/profile/${comment.authorId}`}>
@@ -13,9 +15,11 @@ function CommentCard({ comment }: Props) {
       </Link>
       <p>{comment.comment}</p>
       <p>лайкнули {comment.likesCount} раз(а)</p>
-      <p>
-        {comment.isLiked ? "комментарий лайкнут" : "комментарий не лайкнут"}
-      </p>
+      <LikeCommentButton
+        id={comment.id}
+        isLiked={comment.isLiked}
+        onChange={onChange}
+      />
     </div>
   );
 }

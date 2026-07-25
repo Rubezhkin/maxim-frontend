@@ -3,14 +3,21 @@ import UserCard from "./UserCard";
 
 interface Props {
   users: IUserList[];
+  onChange: () => Promise<void>;
 }
 
-function UserList({ users }: Props) {
+function UserList({ users, onChange }: Props) {
   return (
     <>
-      {users.map((user) => (
-        <UserCard key={user.id} user={user} />
-      ))}
+      {(users.length ?? 0) > 0 ? (
+        <>
+          {users.map((user) => (
+            <UserCard key={user.id} user={user} onChange={onChange} />
+          ))}
+        </>
+      ) : (
+        <>Пользователей нет!</>
+      )}
     </>
   );
 }
