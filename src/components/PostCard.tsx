@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { IPost } from "../models/IPost";
 import LikePostButton from "./LikePostButton";
+import { useAppSelector } from "../hooks/redux";
+import DeletePostButton from "./DeletePostButton";
 
 interface Props {
   post: IPost;
@@ -8,6 +10,7 @@ interface Props {
 }
 
 function PostCard({ post, onChange }: Props) {
+  const authUser = useAppSelector((state) => state.auth.user);
   return (
     <div>
       <Link to={`/post/${post.id}`}>
@@ -25,7 +28,14 @@ function PostCard({ post, onChange }: Props) {
       )}
       <p>лайкнули {post.likesCount} раз(а)</p>
       <LikePostButton id={post.id} isLiked={post.isLiked} onChange={onChange} />
-      <Link to={`/post/${post.id}/edit`}>Редактировать пост</Link>
+      {authUser?.id === post.authorId ? (
+        <>
+          <Link to={`/post/${post.id}/edit`}>Редактировать пост</Link>
+          <DeletePostButton id={post.id} onChange={onChange} />
+        </>
+      ) : (
+        <></>
+      )}
       <p>прокомментировали {post.commentsCount} раз(а)</p>
     </div>
   );

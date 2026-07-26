@@ -11,6 +11,7 @@ import SubscribersPage from "./pages/SubscribersPage";
 import SubscriptionPage from "./pages/SubscriptionsPage";
 import ErrorPage from "./pages/ErrorPage";
 import CreatePostPage from "./pages/CreatePostPage";
+import EditPostPage from "./pages/EditPostPage";
 
 function App() {
   return (
@@ -47,6 +48,14 @@ function App() {
           element={
             <PrivateRoute>
               <PostPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/post/:id/edit"
+          element={
+            <PrivateRoute>
+              <EditPostPage />
             </PrivateRoute>
           }
         />

@@ -4,6 +4,7 @@ import { api } from "./axios";
 import { getUser } from "./userApi";
 import { getIsLikedPost, getLikeCountPost } from "./likeApi";
 import { getCommentsCount } from "./commentApi";
+import { IUpdatePost } from "../models/IUpdatePost";
 
 export const getFeed = async (): Promise<IPost[]> => {
   const response = await api.get<IPostRequest[]>("/posts");
@@ -48,6 +49,10 @@ export const createPost = async (formData: FormData) => {
   return api.post("/posts", formData);
 };
 
-export const editPost = async (id: number, FormData: FormData) => {
-  return api.put("/posts", FormData, { params: { id } });
+export const editPost = async (id: number, request: IUpdatePost) => {
+  return api.put("/posts", request, { params: { id } });
+};
+
+export const deletePost = async (id: number) => {
+  return api.delete("/posts", { params: { id } });
 };

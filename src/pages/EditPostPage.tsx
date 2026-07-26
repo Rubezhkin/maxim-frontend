@@ -30,10 +30,8 @@ function EditPostPage() {
     }
   };
   const editPostHandle = async () => {
-    formData.append("title", title);
-    formData.append("content", content);
-
-    await editPost(Number(id), formData);
+    const request = { title, content };
+    await editPost(Number(id), request);
     navigate("/");
   };
   return (

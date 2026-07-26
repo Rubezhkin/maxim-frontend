@@ -43,3 +43,7 @@ async function mapComment(comment: ICommentRequest): Promise<IComment> {
     likesCount: likesCount.count,
   };
 }
+
+export const deleteComment = async (id: number) => {
+  return api.delete("/comment", { params: { id } });
+};

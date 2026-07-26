@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { login as loginRequest } from "../api/authApi";
 import { useAppDispatch } from "../hooks/redux";
 import { login as loginAction } from "../store/auth/authSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function LoginPage() {
   const dispatch = useAppDispatch();
@@ -57,6 +57,7 @@ function LoginPage() {
       />
 
       <button onClick={handleLogin}>Войти</button>
+      <Link to="/registration">Регистрация</Link>
     </div>
   );
 }
