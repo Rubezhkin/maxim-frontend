@@ -42,7 +42,7 @@ function UserPage() {
           </Link>
           <br />
           {auhtUser?.id === user.id ? (
-            <>Добавить и убрать посты</>
+            <Link to={"/create"}>Создать пост</Link>
           ) : (
             <SubscribeButton
               id={user?.id}

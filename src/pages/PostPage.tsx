@@ -10,7 +10,7 @@ import { getComments } from "../api/commentApi";
 
 function PostPage() {
   const { id } = useParams();
-  const [post, setPosts] = useState<IPost | null>(null);
+  const [post, setPost] = useState<IPost | null>(null);
   const [comments, setComments] = useState<IComment[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -21,7 +21,7 @@ function PostPage() {
   const loadPost = async () => {
     try {
       const responcePosts = await getPost(Number(id));
-      setPosts(responcePosts);
+      setPost(responcePosts);
       const responceComments = await getComments(Number(id));
       setComments(responceComments);
     } finally {
@@ -38,7 +38,7 @@ function PostPage() {
           {post ? (
             <>
               <PostCard post={post} onChange={loadPost} />
-              <Comments comments={comments} onChange={loadPost} />
+              <Comments id={post.id} comments={comments} onChange={loadPost} />
             </>
           ) : (
             <>Пост не найден!</>

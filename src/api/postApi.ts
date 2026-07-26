@@ -43,3 +43,11 @@ async function mapPost(post: IPostRequest): Promise<IPost> {
     commentsCount: commentsCount.count,
   };
 }
+
+export const createPost = async (formData: FormData) => {
+  return api.post("/posts", formData);
+};
+
+export const editPost = async (id: number, FormData: FormData) => {
+  return api.put("/posts", FormData, { params: { id } });
+};

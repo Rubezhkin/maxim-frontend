@@ -10,6 +10,7 @@ import PostPage from "./pages/PostPage";
 import SubscribersPage from "./pages/SubscribersPage";
 import SubscriptionPage from "./pages/SubscriptionsPage";
 import ErrorPage from "./pages/ErrorPage";
+import CreatePostPage from "./pages/CreatePostPage";
 
 function App() {
   return (
@@ -62,6 +63,14 @@ function App() {
           element={
             <PrivateRoute>
               <SubscriptionPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/create"
+          element={
+            <PrivateRoute>
+              <CreatePostPage />
             </PrivateRoute>
           }
         />

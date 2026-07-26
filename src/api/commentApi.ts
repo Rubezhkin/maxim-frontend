@@ -25,6 +25,12 @@ export async function getComments(postId: number): Promise<IComment[]> {
 
   return Promise.all(responce.data.map(mapComment));
 }
+export async function createComment(
+  id: number,
+  comment: string,
+): Promise<void> {
+  await api.post<void>("/comment", { comment }, { params: { id } });
+}
 
 async function mapComment(comment: ICommentRequest): Promise<IComment> {
   const author = await getUser(comment.authorId);
