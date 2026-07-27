@@ -1,14 +1,17 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getUserProfile } from "../api/userApi";
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import { IUserProfile } from "../models/IUserProfile";
 import PostFeed from "../components/PostFeed";
+import SubscribeButton from "../components/SubscribeButton";
+import { useAppSelector } from "../hooks/redux";
 
 function UserPage() {
   const { id } = useParams();
   const [user, setUser] = useState<IUserProfile | null>(null);
   const [loading, setLoading] = useState(true);
+  const auhtUser = useAppSelector((state) => state.auth.user);
 
   useEffect(() => {
     loadUser();
@@ -27,14 +30,30 @@ function UserPage() {
       <Header />
       {loading ? (
         <>Идет Загрузка</>
-      ) : (
+      ) : user ? (
         <>
           страница пользователя {user?.login} <br />
-          {user?.subscriberCount} подписчиков <br />
-          {user?.subscriptionCount} подписок
+          <Link to={`/profile/${user?.id}/subscribers`}>
+            {user?.subscriberCount} подписчиков{" "}
+          </Link>
           <br />
-          <PostFeed posts={user?.posts ?? []} />
+          <Link to={`/profile/${user?.id}/subscriptions`}>
+            {user?.subscriptionCount} подписок
+          </Link>
+          <br />
+          {auhtUser?.id === user.id ? (
+            <Link to={"/create"}>Создать пост</Link>
+          ) : (
+            <SubscribeButton
+              id={user?.id}
+              isSubscribed={user?.isSubscribed}
+              onChange={loadUser}
+            />
+          )}
+          <PostFeed posts={user?.posts ?? []} onChange={loadUser} />
         </>
+      ) : (
+        <>Пользватель не найден</>
       )}
     </div>
   );

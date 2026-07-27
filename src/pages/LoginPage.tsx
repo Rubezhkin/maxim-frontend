@@ -14,8 +14,6 @@ function LoginPage() {
     try {
       const response = await loginRequest(login, password);
 
-      console.log(response.data);
-
       dispatch(
         loginAction({
           token: response.data.access,
@@ -59,6 +57,7 @@ function LoginPage() {
       />
 
       <button onClick={handleLogin}>Войти</button>
+      <Link to="/registration">Регистрация</Link>
     </div>
   );
 }

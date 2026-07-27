@@ -5,5 +5,6 @@ export interface IUserProfile {
   login: string;
   subscriberCount: number;
   subscriptionCount: number;
+  isSubscribed: boolean;
   posts: IPost[];
 }

@@ -3,13 +3,17 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage";
 import FeedPage from "./pages/FeedPage";
-import { useAppSelector } from "./hooks/redux";
 import PrivateRoute from "./components/PrivateRoute";
 import UserPage from "./pages/UserPage";
 import UserListPage from "./pages/UserListPage";
+import PostPage from "./pages/PostPage";
+import SubscribersPage from "./pages/SubscribersPage";
+import SubscriptionPage from "./pages/SubscriptionsPage";
+import ErrorPage from "./pages/ErrorPage";
+import CreatePostPage from "./pages/CreatePostPage";
+import EditPostPage from "./pages/EditPostPage";
 
 function App() {
-  const isAuth = useAppSelector((state) => state.auth.user);
   return (
     <BrowserRouter>
       <Routes>
@@ -39,6 +43,47 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route
+          path="/post/:id"
+          element={
+            <PrivateRoute>
+              <PostPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/post/:id/edit"
+          element={
+            <PrivateRoute>
+              <EditPostPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/profile/:id/subscribers"
+          element={
+            <PrivateRoute>
+              <SubscribersPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/profile/:id/subscriptions"
+          element={
+            <PrivateRoute>
+              <SubscriptionPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/create"
+          element={
+            <PrivateRoute>
+              <CreatePostPage />
+            </PrivateRoute>
+          }
+        />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
   );

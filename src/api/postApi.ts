@@ -2,8 +2,9 @@ import { IPost } from "../models/IPost";
 import { IPostRequest } from "../models/IPostRequest";
 import { api } from "./axios";
 import { getUser } from "./userApi";
-import { getIsLiked, getLikeCount } from "./likeApi";
+import { getIsLikedPost, getLikeCountPost } from "./likeApi";
 import { getCommentsCount } from "./commentApi";
+import { IUpdatePost } from "../models/IUpdatePost";
 
 export const getFeed = async (): Promise<IPost[]> => {
   const response = await api.get<IPostRequest[]>("/posts");
@@ -19,10 +20,20 @@ export async function getPostsByAuthor(authorId: number): Promise<IPost[]> {
   return Promise.all(response.data.map(mapPost));
 }
 
+export async function getPost(postId: number): Promise<IPost> {
+  const responce = await api.get<IPostRequest>("posts/by-id", {
+    params: {
+      id: postId,
+    },
+  });
+
+  return mapPost(responce.data);
+}
+
 async function mapPost(post: IPostRequest): Promise<IPost> {
   const author = await getUser(post.authorId);
-  const likes = await getLikeCount(post.id);
-  const isLiked = await getIsLiked(post.id);
+  const likes = await getLikeCountPost(post.id);
+  const isLiked = await getIsLikedPost(post.id);
   const commentsCount = await getCommentsCount(post.id);
 
   return {
@@ -33,3 +44,15 @@ async function mapPost(post: IPostRequest): Promise<IPost> {
     commentsCount: commentsCount.count,
   };
 }
+
+export const createPost = async (formData: FormData) => {
+  return api.post("/posts", formData);
+};
+
+export const editPost = async (id: number, request: IUpdatePost) => {
+  return api.put("/posts", request, { params: { id } });
+};
+
+export const deletePost = async (id: number) => {
+  return api.delete("/posts", { params: { id } });
+};

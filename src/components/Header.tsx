@@ -9,8 +9,6 @@ function Header() {
   const navigate = useNavigate();
   const user = useAppSelector((state) => state.auth.user);
 
-  console.log("user data ", user);
-
   const handleLogout = async () => {
     await logoutResponse();
 

@@ -22,7 +22,11 @@ function FeedPage() {
   return (
     <>
       <Header />
-      {loading ? "Идет загрузка" : <PostFeed posts={posts} />}
+      {loading ? (
+        "Идет загрузка"
+      ) : (
+        <PostFeed posts={posts} onChange={loadPosts} />
+      )}
     </>
   );
 }
